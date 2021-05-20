@@ -1,0 +1,5 @@
+package com.guestbook.repo;
+
+public interface GuestEntryRepository {
+
+}

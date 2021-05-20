@@ -1,0 +1,77 @@
+package com.guestbook.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.zip.DataFormatException;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.platform.commons.util.ReflectionUtils;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.guestbook.dto.EntryDto;
+import com.guestbook.entity.Entry;
+import com.guestbook.entity.UserDetails;
+import com.guestbook.mapper.EntryMapper;
+import com.guestbook.repo.GuestEntryRepository;
+import com.guestbook.repo.UserDetailsRepository;
+
+@RunWith(MockitoJUnitRunner.class)
+public class GuestEntryServiceTest {
+	@Mock
+	private GuestEntryRepository guestEntryRepository;
+
+	@Mock
+	private UserDetailsRepository userDetailsRepository;
+
+	@Mock
+	private FileStorageService fileStorageService;
+
+	@InjectMocks
+	private GuestEntryService service;
+	
+	@Mock
+	EntryMapper instance;
+	
+	@Before()
+	public void init() throws NoSuchFieldException, SecurityException, Exception {
+		//setFinalStatic(EntryMapper.class.getField("INSTANCE"), instance);
+	}
+
+	@Test
+	public void test_create_success() throws DataFormatException {
+
+		EntryDto entryDto = new EntryDto();
+		entryDto.setContent("test");
+		Entry entry = new Entry();
+		when(instance.convertToEntity(entryDto)).thenReturn(entry);
+		String username = "test";
+		UserDetails user = new UserDetails();
+		when(userDetailsRepository.findByUsername(username)).thenReturn(user);
+		when(instance.convertToDTO(entry)).thenReturn(entryDto);
+		when(this.guestEntryRepository.saveAndFlush(entry)).thenReturn(entry);
+		assertEquals(this.service.create(entryDto, username), entryDto);
+	}
+
+	@Test(expected = DataFormatException.class)
+	public void test_create_Exception() {
+
+	}
+
+	static void setFinalStatic(Field field, Object newValue) throws Exception {
+		field.setAccessible(true);
+
+		Field modifiersField = Field.class.getDeclaredField("modifiers");
+		modifiersField.setAccessible(true);
+		modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+
+		field.set(null, newValue);
+	}
+}

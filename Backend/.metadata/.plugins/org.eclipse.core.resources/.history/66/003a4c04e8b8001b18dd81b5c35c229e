@@ -1,0 +1,15 @@
+package com.guestbook.dto;
+
+public class EntryDto implements IDto{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private long id;
+	private String content;
+	private boolean isImage;
+	private boolean isApproved;
+	private boolean isDeleted;
+	
+}

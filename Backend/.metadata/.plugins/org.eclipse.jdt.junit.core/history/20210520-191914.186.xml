@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="GuestEntryServiceTest" project="GuestbookService" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="com.guestbook.service.GuestEntryServiceTest" time="0.933" displayname="GuestEntryServiceTest" uniqueid="[engine:junit-vintage]/[runner:com.guestbook.service.GuestEntryServiceTest]">
+    <testcase name="test_create_Exception_ForInvalidInput" classname="com.guestbook.service.GuestEntryServiceTest" time="0.862" displayname="test_create_Exception_ForInvalidInput" uniqueid="[engine:junit-vintage]/[runner:com.guestbook.service.GuestEntryServiceTest]/[test:test_create_Exception_ForInvalidInput(com.guestbook.service.GuestEntryServiceTest)]"/>
+    <testcase name="test_create_success" classname="com.guestbook.service.GuestEntryServiceTest" time="0.062" displayname="test_create_success" uniqueid="[engine:junit-vintage]/[runner:com.guestbook.service.GuestEntryServiceTest]/[test:test_create_success(com.guestbook.service.GuestEntryServiceTest)]"/>
+    <testcase name="test_create_Exception_ForNullInput" classname="com.guestbook.service.GuestEntryServiceTest" time="0.009" displayname="test_create_Exception_ForNullInput" uniqueid="[engine:junit-vintage]/[runner:com.guestbook.service.GuestEntryServiceTest]/[test:test_create_Exception_ForNullInput(com.guestbook.service.GuestEntryServiceTest)]"/>
+  </testsuite>
+</testrun>

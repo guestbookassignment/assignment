@@ -1,0 +1,123 @@
+package com.tamilbazaar.mapper;
+
+import com.tamilbazaar.dto.CountOfferDto;
+
+import com.tamilbazaar.entity.CountOffer;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+
+import org.mapstruct.factory.Mappers;
+
+@Generated(
+
+    value = "org.mapstruct.ap.MappingProcessor",
+
+    date = "2021-04-29T19:41:04+0100",
+
+    comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
+
+)
+
+public class CountOfferMapperImpl extends CountOfferMapper {
+
+    private final ProductMapper productMapper = Mappers.getMapper( ProductMapper.class );
+
+    @Override
+
+    public CountOfferDto convertToDTO(CountOffer entity) {
+
+        if ( entity == null ) {
+
+            return null;
+        }
+
+        CountOfferDto countOfferDto = new CountOfferDto();
+
+        countOfferDto.setOfferId( entity.getOfferId() );
+
+        countOfferDto.setDescription( entity.getDescription() );
+
+        countOfferDto.setType( entity.getType() );
+
+        countOfferDto.setDeleted( entity.isDeleted() );
+
+        countOfferDto.setSource( productMapper.convertToDTO( entity.getSource() ) );
+
+        countOfferDto.setCount( entity.getCount() );
+
+        countOfferDto.setPrice( entity.getPrice() );
+
+        return countOfferDto;
+    }
+
+    @Override
+
+    public List<CountOfferDto> convertToDTOList(List<CountOffer> entities) {
+
+        if ( entities == null ) {
+
+            return null;
+        }
+
+        List<CountOfferDto> list = new ArrayList<CountOfferDto>();
+
+        for ( CountOffer countOffer : entities ) {
+
+            list.add( convertToDTO( countOffer ) );
+        }
+
+        return list;
+    }
+
+    @Override
+
+    public CountOffer convertToEntity(CountOfferDto dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        CountOffer countOffer = new CountOffer();
+
+        countOffer.setOfferId( dto.getOfferId() );
+
+        countOffer.setDescription( dto.getDescription() );
+
+        countOffer.setType( dto.getType() );
+
+        countOffer.setDeleted( dto.isDeleted() );
+
+        countOffer.setSource( productMapper.convertToEntity( dto.getSource() ) );
+
+        countOffer.setCount( dto.getCount() );
+
+        countOffer.setPrice( dto.getPrice() );
+
+        return countOffer;
+    }
+
+    @Override
+
+    public List<CountOffer> convertToEntityList(List<CountOfferDto> dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        List<CountOffer> list = new ArrayList<CountOffer>();
+
+        for ( CountOfferDto countOfferDto : dto ) {
+
+            list.add( convertToEntity( countOfferDto ) );
+        }
+
+        return list;
+    }
+}
+

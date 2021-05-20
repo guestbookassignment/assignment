@@ -1,0 +1,6 @@
+package com.guestbook.entity;
+
+public class Entry implements java.io.Serializable{
+	private long id;
+	
+}

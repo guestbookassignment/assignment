@@ -1,0 +1,5 @@
+package com.guestbook.mapper;
+
+public class EntryMapper {
+
+}

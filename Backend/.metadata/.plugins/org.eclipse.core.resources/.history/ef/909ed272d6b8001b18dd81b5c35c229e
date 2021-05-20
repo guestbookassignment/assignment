@@ -1,0 +1,119 @@
+package com.tamilbazaar.mapper;
+
+import com.tamilbazaar.dto.AddressDto;
+
+import com.tamilbazaar.entity.Address;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+
+@Generated(
+
+    value = "org.mapstruct.ap.MappingProcessor",
+
+    date = "2021-04-29T19:41:04+0100",
+
+    comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
+
+)
+
+public class AddressMapperImpl extends AddressMapper {
+
+    @Override
+
+    public AddressDto convertToDTO(Address entity) {
+
+        if ( entity == null ) {
+
+            return null;
+        }
+
+        AddressDto addressDto = new AddressDto();
+
+        addressDto.setAddressLine1( entity.getAddressLine1() );
+
+        addressDto.setAddressLine2( entity.getAddressLine2() );
+
+        addressDto.setAddressLine3( entity.getAddressLine3() );
+
+        addressDto.setTown( entity.getTown() );
+
+        addressDto.setRegion( entity.getRegion() );
+
+        addressDto.setPostCode( entity.getPostCode() );
+
+        addressDto.setCountry( entity.getCountry() );
+
+        return addressDto;
+    }
+
+    @Override
+
+    public List<AddressDto> convertToDTOList(List<Address> entities) {
+
+        if ( entities == null ) {
+
+            return null;
+        }
+
+        List<AddressDto> list = new ArrayList<AddressDto>();
+
+        for ( Address address : entities ) {
+
+            list.add( convertToDTO( address ) );
+        }
+
+        return list;
+    }
+
+    @Override
+
+    public Address convertToEntity(AddressDto dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        Address address = new Address();
+
+        address.setAddressLine1( dto.getAddressLine1() );
+
+        address.setAddressLine2( dto.getAddressLine2() );
+
+        address.setAddressLine3( dto.getAddressLine3() );
+
+        address.setTown( dto.getTown() );
+
+        address.setRegion( dto.getRegion() );
+
+        address.setPostCode( dto.getPostCode() );
+
+        address.setCountry( dto.getCountry() );
+
+        return address;
+    }
+
+    @Override
+
+    public List<Address> convertToEntityList(List<AddressDto> dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        List<Address> list = new ArrayList<Address>();
+
+        for ( AddressDto addressDto : dto ) {
+
+            list.add( convertToEntity( addressDto ) );
+        }
+
+        return list;
+    }
+}
+

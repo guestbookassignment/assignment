@@ -1,0 +1,127 @@
+package com.tamilbazaar.mapper;
+
+import com.tamilbazaar.dto.BuyxGetYOfferDto;
+
+import com.tamilbazaar.entity.BuyxGetYOffer;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+
+import org.mapstruct.factory.Mappers;
+
+@Generated(
+
+    value = "org.mapstruct.ap.MappingProcessor",
+
+    date = "2021-04-29T19:41:04+0100",
+
+    comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
+
+)
+
+public class BuyxGetYOfferMapperImpl extends BuyxGetYOfferMapper {
+
+    private final ProductMapper productMapper = Mappers.getMapper( ProductMapper.class );
+
+    @Override
+
+    public BuyxGetYOfferDto convertToDTO(BuyxGetYOffer entity) {
+
+        if ( entity == null ) {
+
+            return null;
+        }
+
+        BuyxGetYOfferDto buyxGetYOfferDto = new BuyxGetYOfferDto();
+
+        buyxGetYOfferDto.setOfferId( entity.getOfferId() );
+
+        buyxGetYOfferDto.setDescription( entity.getDescription() );
+
+        buyxGetYOfferDto.setType( entity.getType() );
+
+        buyxGetYOfferDto.setDeleted( entity.isDeleted() );
+
+        buyxGetYOfferDto.setSource( productMapper.convertToDTO( entity.getSource() ) );
+
+        buyxGetYOfferDto.setSourceCount( entity.getSourceCount() );
+
+        buyxGetYOfferDto.setDestination( productMapper.convertToDTO( entity.getDestination() ) );
+
+        buyxGetYOfferDto.setDesCount( entity.getDesCount() );
+
+        return buyxGetYOfferDto;
+    }
+
+    @Override
+
+    public List<BuyxGetYOfferDto> convertToDTOList(List<BuyxGetYOffer> entities) {
+
+        if ( entities == null ) {
+
+            return null;
+        }
+
+        List<BuyxGetYOfferDto> list = new ArrayList<BuyxGetYOfferDto>();
+
+        for ( BuyxGetYOffer buyxGetYOffer : entities ) {
+
+            list.add( convertToDTO( buyxGetYOffer ) );
+        }
+
+        return list;
+    }
+
+    @Override
+
+    public BuyxGetYOffer convertToEntity(BuyxGetYOfferDto dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        BuyxGetYOffer buyxGetYOffer = new BuyxGetYOffer();
+
+        buyxGetYOffer.setOfferId( dto.getOfferId() );
+
+        buyxGetYOffer.setDescription( dto.getDescription() );
+
+        buyxGetYOffer.setType( dto.getType() );
+
+        buyxGetYOffer.setDeleted( dto.isDeleted() );
+
+        buyxGetYOffer.setSource( productMapper.convertToEntity( dto.getSource() ) );
+
+        buyxGetYOffer.setSourceCount( dto.getSourceCount() );
+
+        buyxGetYOffer.setDestination( productMapper.convertToEntity( dto.getDestination() ) );
+
+        buyxGetYOffer.setDesCount( dto.getDesCount() );
+
+        return buyxGetYOffer;
+    }
+
+    @Override
+
+    public List<BuyxGetYOffer> convertToEntityList(List<BuyxGetYOfferDto> dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        List<BuyxGetYOffer> list = new ArrayList<BuyxGetYOffer>();
+
+        for ( BuyxGetYOfferDto buyxGetYOfferDto : dto ) {
+
+            list.add( convertToEntity( buyxGetYOfferDto ) );
+        }
+
+        return list;
+    }
+}
+

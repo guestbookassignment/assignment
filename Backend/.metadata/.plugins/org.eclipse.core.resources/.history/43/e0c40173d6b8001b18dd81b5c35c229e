@@ -1,0 +1,107 @@
+package com.tamilbazaar.mapper;
+
+import com.tamilbazaar.dto.OfferDto;
+
+import com.tamilbazaar.entity.Offer;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+
+@Generated(
+
+    value = "org.mapstruct.ap.MappingProcessor",
+
+    date = "2021-04-29T19:41:04+0100",
+
+    comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
+
+)
+
+public class OfferMapperImpl extends OfferMapper {
+
+    @Override
+
+    public OfferDto convertToDTO(Offer entity) {
+
+        if ( entity == null ) {
+
+            return null;
+        }
+
+        OfferDto offerDto = new OfferDto();
+
+        offerDto.setOfferId( entity.getOfferId() );
+
+        offerDto.setDescription( entity.getDescription() );
+
+        offerDto.setType( entity.getType() );
+
+        offerDto.setDeleted( entity.isDeleted() );
+
+        return offerDto;
+    }
+
+    @Override
+
+    public List<OfferDto> convertToDTOList(List<Offer> entities) {
+
+        if ( entities == null ) {
+
+            return null;
+        }
+
+        List<OfferDto> list = new ArrayList<OfferDto>();
+
+        for ( Offer offer : entities ) {
+
+            list.add( convertToDTO( offer ) );
+        }
+
+        return list;
+    }
+
+    @Override
+
+    public Offer convertToEntity(OfferDto dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        Offer offer = new Offer();
+
+        offer.setOfferId( dto.getOfferId() );
+
+        offer.setDescription( dto.getDescription() );
+
+        offer.setType( dto.getType() );
+
+        offer.setDeleted( dto.isDeleted() );
+
+        return offer;
+    }
+
+    @Override
+
+    public List<Offer> convertToEntityList(List<OfferDto> dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        List<Offer> list = new ArrayList<Offer>();
+
+        for ( OfferDto offerDto : dto ) {
+
+            list.add( convertToEntity( offerDto ) );
+        }
+
+        return list;
+    }
+}
+

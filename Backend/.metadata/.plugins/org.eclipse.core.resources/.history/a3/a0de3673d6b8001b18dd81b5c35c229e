@@ -1,0 +1,135 @@
+package com.tamilbazaar.mapper;
+
+import com.tamilbazaar.dto.ProductDto;
+
+import com.tamilbazaar.entity.Product;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+
+import org.mapstruct.factory.Mappers;
+
+@Generated(
+
+    value = "org.mapstruct.ap.MappingProcessor",
+
+    date = "2021-04-29T19:41:04+0100",
+
+    comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
+
+)
+
+public class ProductMapperImpl extends ProductMapper {
+
+    private final CategoryMapper categoryMapper = Mappers.getMapper( CategoryMapper.class );
+
+    @Override
+
+    public ProductDto convertToDTO(Product entity) {
+
+        if ( entity == null ) {
+
+            return null;
+        }
+
+        ProductDto productDto = new ProductDto();
+
+        productDto.setProductId( entity.getProductId() );
+
+        productDto.setName( entity.getName() );
+
+        productDto.setSkuId( entity.getSkuId() );
+
+        productDto.setCategoryId( categoryMapper.convertToDTO( entity.getCategoryId() ) );
+
+        productDto.setPrice( entity.getPrice() );
+
+        productDto.setActive( entity.isActive() );
+
+        productDto.setLink( entity.getLink() );
+
+        productDto.setQuantity( entity.getQuantity() );
+
+        productDto.setUnit( entity.getUnit() );
+
+        productDto.setDescription( entity.getDescription() );
+
+        return productDto;
+    }
+
+    @Override
+
+    public List<ProductDto> convertToDTOList(List<Product> entities) {
+
+        if ( entities == null ) {
+
+            return null;
+        }
+
+        List<ProductDto> list = new ArrayList<ProductDto>();
+
+        for ( Product product : entities ) {
+
+            list.add( convertToDTO( product ) );
+        }
+
+        return list;
+    }
+
+    @Override
+
+    public Product convertToEntity(ProductDto dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        Product product = new Product();
+
+        product.setName( dto.getName() );
+
+        product.setSkuId( dto.getSkuId() );
+
+        product.setCategoryId( categoryMapper.convertToEntity( dto.getCategoryId() ) );
+
+        product.setPrice( dto.getPrice() );
+
+        product.setActive( dto.isActive() );
+
+        product.setProductId( dto.getProductId() );
+
+        product.setLink( dto.getLink() );
+
+        product.setQuantity( dto.getQuantity() );
+
+        product.setUnit( dto.getUnit() );
+
+        product.setDescription( dto.getDescription() );
+
+        return product;
+    }
+
+    @Override
+
+    public List<Product> convertToEntityList(List<ProductDto> dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        List<Product> list = new ArrayList<Product>();
+
+        for ( ProductDto productDto : dto ) {
+
+            list.add( convertToEntity( productDto ) );
+        }
+
+        return list;
+    }
+}
+

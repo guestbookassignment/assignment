@@ -1,0 +1,10 @@
+package com.guestbook.util;
+
+public class Constants {
+	private Constants() {}
+	public static final String GUEST_ENTRY_URI = "/guest/entry";
+	public static final String GUEST_ENTRY_FILE_UPLOAD_URI = "/guest/entry/file";
+	public static final String ADMIN_ENTRY_URI = "/admin/entry";
+	public static final String ADMIN_ENTRY_FILE_UPLOAD_URI = "/guest/entry/file";
+	
+}

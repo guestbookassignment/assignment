@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="GuestEntryServiceTest.test_approveOrRejectEntry" project="GuestbookService" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.guestbook.service.GuestEntryServiceTest" time="0.929" displayname="GuestEntryServiceTest" uniqueid="[engine:junit-vintage]/[runner:com.guestbook.service.GuestEntryServiceTest]">
+    <testcase name="test_approveOrRejectEntry" classname="com.guestbook.service.GuestEntryServiceTest" time="0.929" displayname="test_approveOrRejectEntry" uniqueid="[engine:junit-vintage]/[runner:com.guestbook.service.GuestEntryServiceTest]/[test:test_approveOrRejectEntry(com.guestbook.service.GuestEntryServiceTest)]"/>
+  </testsuite>
+</testrun>

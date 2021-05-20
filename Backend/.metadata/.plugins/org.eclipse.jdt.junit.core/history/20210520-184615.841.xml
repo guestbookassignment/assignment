@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="LoginServiceTest" project="GuestbookService" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="com.guestbook.service.LoginServiceTest" time="1.554" displayname="LoginServiceTest" uniqueid="[engine:junit-vintage]/[runner:com.guestbook.service.LoginServiceTest]">
+    <testcase name="test_validate_failure" classname="com.guestbook.service.LoginServiceTest" time="1.186" displayname="test_validate_failure" uniqueid="[engine:junit-vintage]/[runner:com.guestbook.service.LoginServiceTest]/[test:test_validate_failure(com.guestbook.service.LoginServiceTest)]"/>
+    <testcase name="test_Validate_success" classname="com.guestbook.service.LoginServiceTest" time="0.368" displayname="test_Validate_success" uniqueid="[engine:junit-vintage]/[runner:com.guestbook.service.LoginServiceTest]/[test:test_Validate_success(com.guestbook.service.LoginServiceTest)]"/>
+  </testsuite>
+</testrun>

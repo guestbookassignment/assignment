@@ -1,0 +1,103 @@
+package com.tamilbazaar.mapper;
+
+import com.tamilbazaar.dto.ConfigDto;
+
+import com.tamilbazaar.entity.Config;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+
+@Generated(
+
+    value = "org.mapstruct.ap.MappingProcessor",
+
+    date = "2021-04-29T19:41:04+0100",
+
+    comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
+
+)
+
+public class ConfigMapperImpl extends ConfigMapper {
+
+    @Override
+
+    public ConfigDto convertToDTO(Config config) {
+
+        if ( config == null ) {
+
+            return null;
+        }
+
+        ConfigDto configDto = new ConfigDto();
+
+        configDto.setConfigId( config.getConfigId() );
+
+        configDto.setName( config.getName() );
+
+        configDto.setValue( config.getValue() );
+
+        return configDto;
+    }
+
+    @Override
+
+    public List<ConfigDto> convertToDTOList(List<Config> configs) {
+
+        if ( configs == null ) {
+
+            return null;
+        }
+
+        List<ConfigDto> list = new ArrayList<ConfigDto>();
+
+        for ( Config config : configs ) {
+
+            list.add( convertToDTO( config ) );
+        }
+
+        return list;
+    }
+
+    @Override
+
+    public Config convertToEntity(ConfigDto dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        Config config = new Config();
+
+        config.setConfigId( dto.getConfigId() );
+
+        config.setName( dto.getName() );
+
+        config.setValue( dto.getValue() );
+
+        return config;
+    }
+
+    @Override
+
+    public List<Config> convertToEntityList(List<ConfigDto> dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        List<Config> list = new ArrayList<Config>();
+
+        for ( ConfigDto configDto : dto ) {
+
+            list.add( convertToEntity( configDto ) );
+        }
+
+        return list;
+    }
+}
+

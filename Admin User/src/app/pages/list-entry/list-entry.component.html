@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-md-12">
+        <card cardTitle="Data Table">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Phone number</th>
+                        <th>Content</th>
+                        <th>Approve/Reject</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let item of tableData | paginate: { id: 'pager', itemsPerPage: pageSize, currentPage: pageNumber};let index = index">
+                        <td>{{item.user.username}}</td>
+                        <td>{{item.user.phoneNumber}}</td>
+                        <td>
+                            <ng-container *ngIf="item.image; else notImage">
+                                <a routerLink="/pages/edit-entry/{{item.id}}"><img [src]="item.content"
+                                        style="height:150px; width:150px"></a>
+                            </ng-container>
+
+                            <ng-template #notImage>
+                                <a routerLink="/pages/edit-entry/{{item.id}}">{{item.content}}</a>
+                            </ng-template>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="item.approved; else notApproved">
+                                Approved
+                            </ng-container>
+
+                            <ng-template #notApproved>
+                                <button class="btn btn-success" (click)="approveEntry(index, item.id)">Approve</button>
+                            </ng-template>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="item.deleted; else notDeleted">
+                                Deleted
+                            </ng-container>
+
+                            <ng-template #notDeleted>
+                                <button class="btn btn-danger" (click)="deleteEntry(index, item.id)">Delete</button>
+                            </ng-template>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </card>
+    </div>
+    <div class="col-md-8"> 
+        <form class="pagination-wrapper">
+            <div class="form-group pages">
+                <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" maxSize="9"
+                    directionLinks="true" autoHide="true" previousLabel="Prev" nextLabel="Next"
+                    screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                    screenReaderCurrentLabel="You're on page">
+                </pagination-controls>
+            </div>
+            <div class="form-group options pages">
+                <div class="input-group input-group-sm">
+                    <select class="form-control" name="pageChangedName" [(ngModel)]="pageSize"
+                        (ngModelChange)="loadData()">
+                        <option>1</option>
+                        <option>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                        <option>200</option>
+                    </select>
+                    <span class="input-group-addon addon-right">Per Page</span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

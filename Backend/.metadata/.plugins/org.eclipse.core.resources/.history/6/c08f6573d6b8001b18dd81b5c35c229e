@@ -1,0 +1,119 @@
+package com.tamilbazaar.mapper;
+
+import com.tamilbazaar.dto.PercentageOfferDto;
+
+import com.tamilbazaar.entity.PercentageOffer;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+
+import org.mapstruct.factory.Mappers;
+
+@Generated(
+
+    value = "org.mapstruct.ap.MappingProcessor",
+
+    date = "2021-04-29T19:41:04+0100",
+
+    comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
+
+)
+
+public class PercentageOfferMapperImpl extends PercentageOfferMapper {
+
+    private final ProductMapper productMapper = Mappers.getMapper( ProductMapper.class );
+
+    @Override
+
+    public PercentageOfferDto convertToDTO(PercentageOffer entity) {
+
+        if ( entity == null ) {
+
+            return null;
+        }
+
+        PercentageOfferDto percentageOfferDto = new PercentageOfferDto();
+
+        percentageOfferDto.setOfferId( entity.getOfferId() );
+
+        percentageOfferDto.setDescription( entity.getDescription() );
+
+        percentageOfferDto.setType( entity.getType() );
+
+        percentageOfferDto.setDeleted( entity.isDeleted() );
+
+        percentageOfferDto.setSource( productMapper.convertToDTO( entity.getSource() ) );
+
+        percentageOfferDto.setPercentageOffer( entity.getPercentageOffer() );
+
+        return percentageOfferDto;
+    }
+
+    @Override
+
+    public List<PercentageOfferDto> convertToDTOList(List<PercentageOffer> entities) {
+
+        if ( entities == null ) {
+
+            return null;
+        }
+
+        List<PercentageOfferDto> list = new ArrayList<PercentageOfferDto>();
+
+        for ( PercentageOffer percentageOffer : entities ) {
+
+            list.add( convertToDTO( percentageOffer ) );
+        }
+
+        return list;
+    }
+
+    @Override
+
+    public PercentageOffer convertToEntity(PercentageOfferDto dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        PercentageOffer percentageOffer = new PercentageOffer();
+
+        percentageOffer.setOfferId( dto.getOfferId() );
+
+        percentageOffer.setDescription( dto.getDescription() );
+
+        percentageOffer.setType( dto.getType() );
+
+        percentageOffer.setDeleted( dto.isDeleted() );
+
+        percentageOffer.setSource( productMapper.convertToEntity( dto.getSource() ) );
+
+        percentageOffer.setPercentageOffer( dto.getPercentageOffer() );
+
+        return percentageOffer;
+    }
+
+    @Override
+
+    public List<PercentageOffer> convertToEntityList(List<PercentageOfferDto> dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        List<PercentageOffer> list = new ArrayList<PercentageOffer>();
+
+        for ( PercentageOfferDto percentageOfferDto : dto ) {
+
+            list.add( convertToEntity( percentageOfferDto ) );
+        }
+
+        return list;
+    }
+}
+

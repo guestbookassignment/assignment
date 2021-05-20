@@ -1,0 +1,19 @@
+<div class="card card-block login-card">
+  <h3 class="form-label">Welcome!</h3>
+  <span class="form-label">sign in to access GuestBook</span>
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon addon-left" id="username">
+        <i class="fa fa-user fa-fw"></i>
+      </span>
+      <input [(ngModel)]="model.username" class="form-control with-primary-addon" placeholder="User Name or Email" type="text">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon addon-left" id="password">
+        <i class="fa fa-lock fa-fw"></i>
+      </span>
+      <input [(ngModel)]="model.password" class="form-control with-primary-addon" placeholder="Password" type="password">
+    </div>
+    <button class="btn btn-lg btn-primary" (click)="login()">Login</button>
+  </div>
+</div>

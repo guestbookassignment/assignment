@@ -1,0 +1,11 @@
+package com.guestbook.entity;
+
+public class Entry implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
+	private long id;
+	private String content;
+	private boolean isImage;
+	
+	private UserDetails user;
+	
+}

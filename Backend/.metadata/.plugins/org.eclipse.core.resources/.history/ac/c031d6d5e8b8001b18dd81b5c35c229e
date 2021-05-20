@@ -1,0 +1,11 @@
+package com.guestbook.mapper;
+
+import org.mapstruct.Mapper;
+
+import com.guestbook.dto.UserDto;
+import com.guestbook.entity.UserDetails;
+
+@Mapper
+public class UserDetailsMapper implements IBaseMapper<UserDto, UserDetails>{
+	
+}

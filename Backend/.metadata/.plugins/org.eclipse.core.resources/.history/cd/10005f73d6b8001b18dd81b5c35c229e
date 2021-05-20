@@ -1,0 +1,121 @@
+package com.tamilbazaar.mapper;
+
+import com.tamilbazaar.dto.DeliveryAddressDto;
+
+import com.tamilbazaar.entity.DeliveryAddress;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+
+import org.mapstruct.factory.Mappers;
+
+@Generated(
+
+    value = "org.mapstruct.ap.MappingProcessor",
+
+    date = "2021-04-29T19:41:04+0100",
+
+    comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
+
+)
+
+public class DeliveryAddressMapperImpl extends DeliveryAddressMapper {
+
+    private final AddressMapper addressMapper = Mappers.getMapper( AddressMapper.class );
+
+    private final UserDetailsMapper userDetailsMapper = Mappers.getMapper( UserDetailsMapper.class );
+
+    @Override
+
+    public DeliveryAddressDto convertToDTO(DeliveryAddress entity) {
+
+        if ( entity == null ) {
+
+            return null;
+        }
+
+        DeliveryAddressDto deliveryAddressDto = new DeliveryAddressDto();
+
+        deliveryAddressDto.setDeliveryId( entity.getDeliveryId() );
+
+        deliveryAddressDto.setAddress( addressMapper.convertToDTO( entity.getAddress() ) );
+
+        deliveryAddressDto.setUserDetails( userDetailsMapper.convertToDTO( entity.getUserDetails() ) );
+
+        deliveryAddressDto.setFirstName( entity.getFirstName() );
+
+        deliveryAddressDto.setLastName( entity.getLastName() );
+
+        deliveryAddressDto.setPhone( entity.getPhone() );
+
+        return deliveryAddressDto;
+    }
+
+    @Override
+
+    public List<DeliveryAddressDto> convertToDTOList(List<DeliveryAddress> entities) {
+
+        if ( entities == null ) {
+
+            return null;
+        }
+
+        List<DeliveryAddressDto> list = new ArrayList<DeliveryAddressDto>();
+
+        for ( DeliveryAddress deliveryAddress : entities ) {
+
+            list.add( convertToDTO( deliveryAddress ) );
+        }
+
+        return list;
+    }
+
+    @Override
+
+    public DeliveryAddress convertToEntity(DeliveryAddressDto dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        DeliveryAddress deliveryAddress = new DeliveryAddress();
+
+        deliveryAddress.setDeliveryId( dto.getDeliveryId() );
+
+        deliveryAddress.setAddress( addressMapper.convertToEntity( dto.getAddress() ) );
+
+        deliveryAddress.setUserDetails( userDetailsMapper.convertToEntity( dto.getUserDetails() ) );
+
+        deliveryAddress.setFirstName( dto.getFirstName() );
+
+        deliveryAddress.setLastName( dto.getLastName() );
+
+        deliveryAddress.setPhone( dto.getPhone() );
+
+        return deliveryAddress;
+    }
+
+    @Override
+
+    public List<DeliveryAddress> convertToEntityList(List<DeliveryAddressDto> dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        List<DeliveryAddress> list = new ArrayList<DeliveryAddress>();
+
+        for ( DeliveryAddressDto deliveryAddressDto : dto ) {
+
+            list.add( convertToEntity( deliveryAddressDto ) );
+        }
+
+        return list;
+    }
+}
+

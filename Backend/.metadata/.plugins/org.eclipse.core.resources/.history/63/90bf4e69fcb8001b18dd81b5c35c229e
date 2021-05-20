@@ -1,0 +1,26 @@
+package com.guestbook.controller;
+
+import static com.guestbook.util.Constants.GUEST_ENTRY_URI;
+
+import java.util.Base64;
+
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.guestbook.dto.EntryDto;
+import io.swagger.annotations.ApiParam;
+
+@RestController
+public class AdminController {
+	@PutMapping(GUEST_ENTRY_URI)
+	public EntryDto updateEntry(@ApiParam(value = "Authorization", required = false) @RequestHeader("Authorization") String authorization,
+			@RequestBody EntryDto entryDto) {
+		logger.info("GuestEntryController: updateEntry - Start");
+		String authToken = authorization.substring("Basic".length()).trim();
+		String username = new String(Base64.getDecoder().decode(authToken)).split(":")[0];
+		logger.info("GuestEntryController: updateEntry - Service Call, Username : " + username);
+		return this.guestEntryService.update(entryDto, username);
+	}
+}

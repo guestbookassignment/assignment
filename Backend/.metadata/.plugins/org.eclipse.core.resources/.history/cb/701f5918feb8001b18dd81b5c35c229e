@@ -1,0 +1,48 @@
+package com.guestbook.controller;
+
+import static com.guestbook.util.Constants.ADMIN_ENTRY_URI;
+
+import java.util.Base64;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.guestbook.dto.EntryDto;
+import com.guestbook.service.GuestEntryService;
+
+import io.swagger.annotations.ApiParam;
+import javassist.NotFoundException;
+
+@RestController
+public class AdminController {
+	
+	@Autowired
+	private GuestEntryService guestEntryService;
+	
+	private Logger logger = LoggerFactory.getLogger(AdminController.class);
+	
+	@GetMapping(ADMIN_ENTRY_URI)
+	public List<EntryDto> getAllEntries() throws NotFoundException {
+		
+		return this.guestEntryService.readAll();
+	}
+	
+	@PutMapping(ADMIN_ENTRY_URI)
+	public EntryDto updateEntry(@ApiParam(value = "Authorization", required = false) @RequestHeader("Authorization") String authorization,
+			@RequestBody EntryDto entryDto) {
+		logger.info("AdminController: updateEntry - Start");
+		String authToken = authorization.substring("Basic".length()).trim();
+		String username = new String(Base64.getDecoder().decode(authToken)).split(":")[0];
+		logger.info("AdminController: updateEntry - Service Call, Username : " + username);
+		return this.guestEntryService.update(entryDto, username);
+	}
+	
+	
+}

@@ -1,0 +1,64 @@
+package com.guestbook.service;
+
+import java.sql.Date;
+import java.util.Calendar;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+
+import com.guestbook.dto.EntryDto;
+import com.guestbook.entity.Audit;
+import com.guestbook.entity.Entry;
+import com.guestbook.entity.UserDetails;
+import com.guestbook.mapper.EntryMapper;
+import com.guestbook.mapper.IBaseMapper;
+import com.guestbook.repo.GuestEntryRepository;
+import com.guestbook.repo.UserDetailsRepository;
+
+@Service
+public class GuestEntryService extends BaseServiceImpl<EntryDto, Entry>{
+
+	
+	@Autowired
+	private GuestEntryRepository guestEntryRepository;
+	
+	@Autowired
+	private UserDetailsRepository userDetailsRepository;
+	
+	@Override
+	public JpaRepository getJPARepository() {
+		return this.guestEntryRepository;
+	}
+
+	@Override
+	public IBaseMapper<EntryDto, Entry> getMapper() {
+		return EntryMapper.INSTANCE;
+	}
+
+	@Override
+	public void updateAudit(Entry entity, String username) {
+		if (entity != null) {
+			Calendar cal = Calendar.getInstance();
+			if (entity.getAudit() == null) {
+				Audit audit = new Audit();
+				audit.setCreatedUser(username);
+				Date date = new Date(cal.getTime().getTime());
+				audit.setCreatedDate(date);
+				entity.setAudit(audit);
+			} else {
+				entity.getAudit().setUpdatedDate(new Date(cal.getTime().getTime()));
+				entity.getAudit().setUpdatedUser(username);
+			}
+		}
+	}
+	
+	public void createEntry(EntryDto entryDto, String username) {
+		Entry entry = getMapper().convertToEntity(entryDto);
+		updateAudit(entry, username);
+		UserDetails user = userDetailsRepository.findByUsername(username);
+		entry.setUser(user);
+		this.guestEntryRepository.saveAndFlush(entry);
+	}
+
+}

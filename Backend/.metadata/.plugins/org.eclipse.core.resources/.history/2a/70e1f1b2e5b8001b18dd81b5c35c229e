@@ -1,0 +1,20 @@
+package com.guestbook.entity;
+
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+public class Entry implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
+	private long id;
+	private String content;
+	private boolean isImage;
+	
+	@ManyToOne(targetEntity = UserDetails.class, fetch = FetchType.LAZY)
+	@JoinColumn(name="user_id",referencedColumnName="id", insertable = false, updatable = false)
+	private UserDetails user;
+	
+	private boolean isApproved;
+	private boolean isDeleted;
+	
+}

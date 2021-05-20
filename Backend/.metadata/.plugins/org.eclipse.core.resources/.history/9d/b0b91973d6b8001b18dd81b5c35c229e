@@ -1,0 +1,117 @@
+package com.tamilbazaar.mapper;
+
+import com.tamilbazaar.dto.OrderItemDto;
+
+import com.tamilbazaar.entity.OrderItem;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+
+import org.mapstruct.factory.Mappers;
+
+@Generated(
+
+    value = "org.mapstruct.ap.MappingProcessor",
+
+    date = "2021-04-29T19:41:04+0100",
+
+    comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
+
+)
+
+public class OrderItemMapperImpl extends OrderItemMapper {
+
+    private final ProductMapper productMapper = Mappers.getMapper( ProductMapper.class );
+
+    private final OfferMapper offerMapper = Mappers.getMapper( OfferMapper.class );
+
+    @Override
+
+    public OrderItemDto convertToDTO(OrderItem orderItem) {
+
+        if ( orderItem == null ) {
+
+            return null;
+        }
+
+        OrderItemDto orderItemDto = new OrderItemDto();
+
+        orderItemDto.setOrderItemId( orderItem.getOrderItemId() );
+
+        orderItemDto.setProduct( productMapper.convertToDTO( orderItem.getProduct() ) );
+
+        orderItemDto.setQuantity( orderItem.getQuantity() );
+
+        orderItemDto.setPrice( orderItem.getPrice() );
+
+        orderItemDto.setOffer( offerMapper.convertToDTO( orderItem.getOffer() ) );
+
+        return orderItemDto;
+    }
+
+    @Override
+
+    public List<OrderItemDto> convertToDTOList(List<OrderItem> orderItems) {
+
+        if ( orderItems == null ) {
+
+            return null;
+        }
+
+        List<OrderItemDto> list = new ArrayList<OrderItemDto>();
+
+        for ( OrderItem orderItem : orderItems ) {
+
+            list.add( convertToDTO( orderItem ) );
+        }
+
+        return list;
+    }
+
+    @Override
+
+    public OrderItem convertToEntity(OrderItemDto dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        OrderItem orderItem = new OrderItem();
+
+        orderItem.setProduct( productMapper.convertToEntity( dto.getProduct() ) );
+
+        orderItem.setQuantity( dto.getQuantity() );
+
+        orderItem.setPrice( dto.getPrice() );
+
+        orderItem.setOffer( offerMapper.convertToEntity( dto.getOffer() ) );
+
+        orderItem.setOrderItemId( dto.getOrderItemId() );
+
+        return orderItem;
+    }
+
+    @Override
+
+    public List<OrderItem> convertToEntityList(List<OrderItemDto> dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        List<OrderItem> list = new ArrayList<OrderItem>();
+
+        for ( OrderItemDto orderItemDto : dto ) {
+
+            list.add( convertToEntity( orderItemDto ) );
+        }
+
+        return list;
+    }
+}
+

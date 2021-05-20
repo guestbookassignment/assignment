@@ -1,0 +1,107 @@
+package com.tamilbazaar.mapper;
+
+import com.tamilbazaar.dto.AuditDto;
+
+import com.tamilbazaar.entity.Audit;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+
+@Generated(
+
+    value = "org.mapstruct.ap.MappingProcessor",
+
+    date = "2021-04-29T19:41:04+0100",
+
+    comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
+
+)
+
+public class AuditMapperImpl extends AuditMapper {
+
+    @Override
+
+    public AuditDto convertToDTO(Audit entity) {
+
+        if ( entity == null ) {
+
+            return null;
+        }
+
+        AuditDto auditDto = new AuditDto();
+
+        auditDto.setCreatedDate( entity.getCreatedDate() );
+
+        auditDto.setCreatedUser( entity.getCreatedUser() );
+
+        auditDto.setUpdatedDate( entity.getUpdatedDate() );
+
+        auditDto.setUpdatedUser( entity.getUpdatedUser() );
+
+        return auditDto;
+    }
+
+    @Override
+
+    public List<AuditDto> convertToDTOList(List<Audit> entities) {
+
+        if ( entities == null ) {
+
+            return null;
+        }
+
+        List<AuditDto> list = new ArrayList<AuditDto>();
+
+        for ( Audit audit : entities ) {
+
+            list.add( convertToDTO( audit ) );
+        }
+
+        return list;
+    }
+
+    @Override
+
+    public Audit convertToEntity(AuditDto dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        Audit audit = new Audit();
+
+        audit.setCreatedDate( dto.getCreatedDate() );
+
+        audit.setCreatedUser( dto.getCreatedUser() );
+
+        audit.setUpdatedDate( dto.getUpdatedDate() );
+
+        audit.setUpdatedUser( dto.getUpdatedUser() );
+
+        return audit;
+    }
+
+    @Override
+
+    public List<Audit> convertToEntityList(List<AuditDto> dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        List<Audit> list = new ArrayList<Audit>();
+
+        for ( AuditDto auditDto : dto ) {
+
+            list.add( convertToEntity( auditDto ) );
+        }
+
+        return list;
+    }
+}
+

@@ -1,0 +1,38 @@
+package com.guestbook.service;
+
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.guestbook.dto.UserDto;
+import com.guestbook.entity.UserDetails;
+import com.guestbook.repo.UserDetailsRepository;
+
+@RunWith(MockitoJUnitRunner.class)
+public class LoginServiceTest {
+
+	@Mock
+	private UserDetailsRepository repository;
+	
+	@InjectMocks
+	private LoginService service;
+	
+	@Test
+	public void test_Validate() throws IllegalAccessException {
+		UserDto dto = new UserDto();
+		dto.setUsername("Test");
+		UserDetails user = new UserDetails();
+		user.setUsername("Test");
+		user.setPassword("$2y$12$p0/Ck3if9MJ.PhQCdUzoQerXfXAUC0MPpnBeKETreGIepuO1l/J1.");
+		when(repository.findByUsername(dto.getUsername())).thenReturn(user);
+		boolean result = this.service.validate(dto);
+		verify(repository, times(1)).saveAndFlush(user);
+		assertEquals(result, true);
+	}
+}

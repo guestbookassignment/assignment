@@ -1,0 +1,151 @@
+package com.tamilbazaar.mapper;
+
+import com.tamilbazaar.dto.OrderDto;
+
+import com.tamilbazaar.dto.OrderItemDto;
+
+import com.tamilbazaar.entity.Order;
+
+import com.tamilbazaar.entity.OrderItem;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+
+import org.mapstruct.factory.Mappers;
+
+@Generated(
+
+    value = "org.mapstruct.ap.MappingProcessor",
+
+    date = "2021-04-29T19:41:04+0100",
+
+    comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
+
+)
+
+public class OrderMapperImpl extends OrderMapper {
+
+    private final OrderItemMapper orderItemMapper = Mappers.getMapper( OrderItemMapper.class );
+
+    private final UserDetailsMapper userDetailsMapper = Mappers.getMapper( UserDetailsMapper.class );
+
+    @Override
+
+    public OrderDto convertToDTO(Order order) {
+
+        if ( order == null ) {
+
+            return null;
+        }
+
+        OrderDto orderDto = new OrderDto();
+
+        orderDto.setOrderId( order.getOrderId() );
+
+        orderDto.setUser( userDetailsMapper.convertToDTO( order.getUser() ) );
+
+        orderDto.setDescription( order.getDescription() );
+
+        orderDto.setTotalAmount( order.getTotalAmount() );
+
+        orderDto.setDeliveryCharge( order.getDeliveryCharge() );
+
+        orderDto.setAmount( order.getAmount() );
+
+        List<OrderItemDto> list = orderItemMapper.convertToDTOList( order.getOrderItemList() );
+
+        if ( list != null ) {
+
+            orderDto.setOrderItemList( list );
+        }
+
+        orderDto.setDelivered( order.isDelivered() );
+
+        orderDto.setReady( order.isReady() );
+
+        orderDto.setCancel( order.isCancel() );
+
+        return orderDto;
+    }
+
+    @Override
+
+    public List<OrderDto> convertToDTOList(List<Order> orders) {
+
+        if ( orders == null ) {
+
+            return null;
+        }
+
+        List<OrderDto> list = new ArrayList<OrderDto>();
+
+        for ( Order order : orders ) {
+
+            list.add( convertToDTO( order ) );
+        }
+
+        return list;
+    }
+
+    @Override
+
+    public Order convertToEntity(OrderDto dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        Order order = new Order();
+
+        order.setOrderId( dto.getOrderId() );
+
+        order.setUser( userDetailsMapper.convertToEntity( dto.getUser() ) );
+
+        order.setDescription( dto.getDescription() );
+
+        order.setTotalAmount( dto.getTotalAmount() );
+
+        order.setDeliveryCharge( dto.getDeliveryCharge() );
+
+        order.setAmount( dto.getAmount() );
+
+        List<OrderItem> list = orderItemMapper.convertToEntityList( dto.getOrderItemList() );
+
+        if ( list != null ) {
+
+            order.setOrderItemList( list );
+        }
+
+        order.setDelivered( dto.isDelivered() );
+
+        order.setReady( dto.isReady() );
+
+        order.setCancel( dto.isCancel() );
+
+        return order;
+    }
+
+    @Override
+
+    public List<Order> convertToEntityList(List<OrderDto> dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        List<Order> list = new ArrayList<Order>();
+
+        for ( OrderDto orderDto : dto ) {
+
+            list.add( convertToEntity( orderDto ) );
+        }
+
+        return list;
+    }
+}
+

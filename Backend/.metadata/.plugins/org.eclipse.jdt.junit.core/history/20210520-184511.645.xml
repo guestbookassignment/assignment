@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="LoginServiceTest.test_Validate" project="GuestbookService" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.guestbook.service.LoginServiceTest" time="1.331" displayname="LoginServiceTest" uniqueid="[engine:junit-vintage]/[runner:com.guestbook.service.LoginServiceTest]">
+    <testcase name="test_Validate" classname="com.guestbook.service.LoginServiceTest" time="1.331" displayname="test_Validate" uniqueid="[engine:junit-vintage]/[runner:com.guestbook.service.LoginServiceTest]/[test:test_Validate(com.guestbook.service.LoginServiceTest)]"/>
+  </testsuite>
+</testrun>

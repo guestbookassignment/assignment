@@ -1,0 +1,5 @@
+package com.guestbook.exception;
+
+public class BaseExceptionHandler {
+
+}

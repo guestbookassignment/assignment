@@ -1,0 +1,109 @@
+package com.tamilbazaar.mapper;
+
+import com.tamilbazaar.dto.BillingAddressDto;
+
+import com.tamilbazaar.entity.BillingAddress;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+
+import org.mapstruct.factory.Mappers;
+
+@Generated(
+
+    value = "org.mapstruct.ap.MappingProcessor",
+
+    date = "2021-04-29T19:41:04+0100",
+
+    comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
+
+)
+
+public class BillingAddressMapperImpl extends BillingAddressMapper {
+
+    private final AddressMapper addressMapper = Mappers.getMapper( AddressMapper.class );
+
+    private final UserDetailsMapper userDetailsMapper = Mappers.getMapper( UserDetailsMapper.class );
+
+    @Override
+
+    public BillingAddressDto convertToDTO(BillingAddress entity) {
+
+        if ( entity == null ) {
+
+            return null;
+        }
+
+        BillingAddressDto billingAddressDto = new BillingAddressDto();
+
+        billingAddressDto.setBillingId( entity.getBillingId() );
+
+        billingAddressDto.setAddress( addressMapper.convertToDTO( entity.getAddress() ) );
+
+        billingAddressDto.setUser( userDetailsMapper.convertToDTO( entity.getUser() ) );
+
+        return billingAddressDto;
+    }
+
+    @Override
+
+    public List<BillingAddressDto> convertToDTOList(List<BillingAddress> entities) {
+
+        if ( entities == null ) {
+
+            return null;
+        }
+
+        List<BillingAddressDto> list = new ArrayList<BillingAddressDto>();
+
+        for ( BillingAddress billingAddress : entities ) {
+
+            list.add( convertToDTO( billingAddress ) );
+        }
+
+        return list;
+    }
+
+    @Override
+
+    public BillingAddress convertToEntity(BillingAddressDto dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        BillingAddress billingAddress = new BillingAddress();
+
+        billingAddress.setBillingId( dto.getBillingId() );
+
+        billingAddress.setAddress( addressMapper.convertToEntity( dto.getAddress() ) );
+
+        billingAddress.setUser( userDetailsMapper.convertToEntity( dto.getUser() ) );
+
+        return billingAddress;
+    }
+
+    @Override
+
+    public List<BillingAddress> convertToEntityList(List<BillingAddressDto> dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        List<BillingAddress> list = new ArrayList<BillingAddress>();
+
+        for ( BillingAddressDto billingAddressDto : dto ) {
+
+            list.add( convertToEntity( billingAddressDto ) );
+        }
+
+        return list;
+    }
+}
+

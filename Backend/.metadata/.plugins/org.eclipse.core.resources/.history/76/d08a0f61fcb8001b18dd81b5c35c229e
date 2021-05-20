@@ -1,0 +1,40 @@
+package com.guestbook.controller;
+
+import static com.guestbook.util.Constants.GUEST_ENTRY_URI;
+
+import java.util.Base64;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.guestbook.dto.EntryDto;
+import com.guestbook.service.GuestEntryService;
+
+import io.swagger.annotations.ApiParam;
+
+@RestController
+public class GuestEntryController {
+
+	@Autowired
+	private GuestEntryService guestEntryService;
+	
+	private Logger logger = LoggerFactory.getLogger(GuestEntryController.class);
+	
+	@PostMapping(GUEST_ENTRY_URI)
+	public EntryDto createEntry(@ApiParam(value = "Authorization", required = false) @RequestHeader("Authorization") String authorization,
+			@RequestBody EntryDto entryDto) {
+		logger.info("GuestEntryController: createEntry - Start");
+		String authToken = authorization.substring("Basic".length()).trim();
+		String username = new String(Base64.getDecoder().decode(authToken)).split(":")[0];
+		logger.info("GuestEntryController: createEntry - Service Call, Username : " + username);
+		return this.guestEntryService.create(entryDto, username);
+	}
+	
+
+}

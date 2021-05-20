@@ -1,0 +1,11 @@
+package com.guestbook.mapper;
+
+import org.mapstruct.Mapper;
+
+import com.guestbook.dto.EntryDto;
+import com.guestbook.entity.Entry;
+
+@Mapper
+public abstract class EntryMapper implements IBaseMapper<EntryDto, Entry>{
+
+}

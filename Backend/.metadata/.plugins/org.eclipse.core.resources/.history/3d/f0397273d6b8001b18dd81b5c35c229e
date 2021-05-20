@@ -1,0 +1,131 @@
+package com.tamilbazaar.mapper;
+
+import com.tamilbazaar.dto.ShopDto;
+
+import com.tamilbazaar.entity.Shop;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+
+import org.mapstruct.factory.Mappers;
+
+@Generated(
+
+    value = "org.mapstruct.ap.MappingProcessor",
+
+    date = "2021-04-29T19:41:04+0100",
+
+    comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
+
+)
+
+public class ShopMapperImpl extends ShopMapper {
+
+    private final AddressMapper addressMapper = Mappers.getMapper( AddressMapper.class );
+
+    @Override
+
+    public ShopDto convertToDTO(Shop entity) {
+
+        if ( entity == null ) {
+
+            return null;
+        }
+
+        ShopDto shopDto = new ShopDto();
+
+        shopDto.setShopId( entity.getShopId() );
+
+        shopDto.setName( entity.getName() );
+
+        shopDto.setDescription( entity.getDescription() );
+
+        shopDto.setPrimaryContactNumber( entity.getPrimaryContactNumber() );
+
+        shopDto.setPrimaryEmailId( entity.getPrimaryEmailId() );
+
+        shopDto.setSecondaryContactNumber( entity.getSecondaryContactNumber() );
+
+        shopDto.setPrimaryContactPerson( entity.getPrimaryContactPerson() );
+
+        shopDto.setSecondaryContactPerson( entity.getSecondaryContactPerson() );
+
+        shopDto.setAddress( addressMapper.convertToDTO( entity.getAddress() ) );
+
+        return shopDto;
+    }
+
+    @Override
+
+    public List<ShopDto> convertToDTOList(List<Shop> entities) {
+
+        if ( entities == null ) {
+
+            return null;
+        }
+
+        List<ShopDto> list = new ArrayList<ShopDto>();
+
+        for ( Shop shop : entities ) {
+
+            list.add( convertToDTO( shop ) );
+        }
+
+        return list;
+    }
+
+    @Override
+
+    public Shop convertToEntity(ShopDto dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        Shop shop = new Shop();
+
+        shop.setShopId( dto.getShopId() );
+
+        shop.setName( dto.getName() );
+
+        shop.setDescription( dto.getDescription() );
+
+        shop.setPrimaryContactNumber( dto.getPrimaryContactNumber() );
+
+        shop.setPrimaryEmailId( dto.getPrimaryEmailId() );
+
+        shop.setSecondaryContactNumber( dto.getSecondaryContactNumber() );
+
+        shop.setPrimaryContactPerson( dto.getPrimaryContactPerson() );
+
+        shop.setSecondaryContactPerson( dto.getSecondaryContactPerson() );
+
+        shop.setAddress( addressMapper.convertToEntity( dto.getAddress() ) );
+
+        return shop;
+    }
+
+    @Override
+
+    public List<Shop> convertToEntityList(List<ShopDto> dto) {
+
+        if ( dto == null ) {
+
+            return null;
+        }
+
+        List<Shop> list = new ArrayList<Shop>();
+
+        for ( ShopDto shopDto : dto ) {
+
+            list.add( convertToEntity( shopDto ) );
+        }
+
+        return list;
+    }
+}
+

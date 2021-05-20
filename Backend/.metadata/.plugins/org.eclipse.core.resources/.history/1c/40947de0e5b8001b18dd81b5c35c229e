@@ -1,0 +1,5 @@
+package com.guestbook.entity;
+
+public class Role {
+
+}

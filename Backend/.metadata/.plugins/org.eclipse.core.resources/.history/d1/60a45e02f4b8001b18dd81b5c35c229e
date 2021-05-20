@@ -1,0 +1,51 @@
+package com.guestbook.service;
+
+import java.io.Serializable;
+import java.sql.Date;
+import java.util.Calendar;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+
+import com.guestbook.entity.Audit;
+import com.guestbook.entity.Entry;
+import com.guestbook.mapper.EntryMapper;
+import com.guestbook.mapper.IBaseMapper;
+import com.guestbook.repo.GuestEntryRepository;
+
+@Service
+public class GuestEntryService extends BaseServiceImpl{
+
+	
+	@Autowired
+	private GuestEntryRepository guestEntryRepository;
+	
+	@Override
+	public JpaRepository getJPARepository() {
+		return this.guestEntryRepository;
+	}
+
+	@Override
+	public IBaseMapper getMapper() {
+		return EntryMapper.INSTANCE;
+	}
+
+	@Override
+	public void updateAudit(Entry entity, String username) {
+		if (entity != null) {
+			Calendar cal = Calendar.getInstance();
+			if (entity.getAudit() == null) {
+				Audit audit = new Audit();
+				audit.setCreatedUser(username);
+				Date date = new Date(cal.getTime().getTime());
+				audit.setCreatedDate(date);
+				entity.setAudit(audit);
+			} else {
+				entity.getAudit().setUpdatedDate(new Date(cal.getTime().getTime()));
+				entity.getAudit().setUpdatedUser(username);
+			}
+		}
+	}
+
+}

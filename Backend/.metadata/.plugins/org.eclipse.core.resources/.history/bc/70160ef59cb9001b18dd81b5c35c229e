@@ -1,0 +1,24 @@
+spring.application.name = guestbook-service
+server.port= 8901
+spring.jpa.generate-ddl=true
+server.ssl.enabled=false
+
+
+# ===============================
+# = DATA SOURCE
+# ===============================
+spring.datasource.url = jdbc:mysql://localhost:3306/guestbookdb?useSSL=false
+spring.datasource.username = root
+spring.datasource.password = Siri123#
+#spring.datasource.password=Lazycow123#
+spring.datasource.driverClassName= com.mysql.jdbc.Driver
+spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.MySQL5Dialect
+spring.jpa.show-sql = true
+
+# the project
+#spring.jpa.hibernate.ddl-auto = create
+spring.datasource.initialization-mode=always
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.hikari.connection-timeout=60000
+spring.datasource.hikari.maximum-pool-size=5
+imgur.client.id = bf2e6f73c61fad0

@@ -1,0 +1,119 @@
+package com.guestbook.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.Optional;
+import java.util.zip.DataFormatException;
+
+import javax.imageio.ImageIO;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.guestbook.dto.EntryDto;
+import com.guestbook.entity.Entry;
+import com.guestbook.entity.UserDetails;
+import com.guestbook.mapper.EntryMapper;
+import com.guestbook.repo.GuestEntryRepository;
+import com.guestbook.repo.UserDetailsRepository;
+
+import javassist.NotFoundException;
+
+@RunWith(MockitoJUnitRunner.class)
+public class GuestEntryServiceTest {
+	@Mock
+	private GuestEntryRepository guestEntryRepository;
+
+	@Mock
+	private UserDetailsRepository userDetailsRepository;
+
+	@Mock
+	private FileStorageService fileStorageService;
+
+	@InjectMocks
+	private GuestEntryService service;
+
+	@Test
+	public void test_create_success() throws NoSuchFieldException, SecurityException, Exception {
+		EntryMapper instance = mock(EntryMapper.class);
+		setFinalStatic(EntryMapper.class.getField("INSTANCE"), instance);
+		EntryDto entryDto = new EntryDto();
+		entryDto.setContent("test");
+		Entry entry = new Entry();
+		when(instance.convertToEntity(entryDto)).thenReturn(entry);
+		String username = "test";
+		UserDetails user = new UserDetails();
+		when(userDetailsRepository.findByUsername(username)).thenReturn(user);
+		when(instance.convertToDTO(entry)).thenReturn(entryDto);
+		when(this.guestEntryRepository.saveAndFlush(entry)).thenReturn(entry);
+		assertEquals(this.service.create(entryDto, username), entryDto);
+	}
+
+	@Test(expected = DataFormatException.class)
+	public void test_create_Exception_ForNullInput() throws DataFormatException {
+		this.service.create(null, "test");
+	}
+	
+	@Test(expected = DataFormatException.class)
+	public void test_create_Exception_ForInvalidInput() throws DataFormatException {
+		this.service.create(new EntryDto(), "test");
+	}
+	
+	@Test
+	public void test_update() throws NoSuchFieldException, SecurityException, Exception {
+		EntryMapper instance = mock(EntryMapper.class);
+		setFinalStatic(EntryMapper.class.getField("INSTANCE"), instance);
+		EntryDto entryDto = new EntryDto();
+		entryDto.setContent("test");
+		Entry entry = new Entry();
+		when(instance.convertToEntity(entryDto)).thenReturn(entry);
+		String username = "test";
+		when(this.guestEntryRepository.saveAndFlush(entry)).thenReturn(entry);
+		when(instance.convertToDTO(entry)).thenReturn(entryDto);
+		assertEquals(this.service.update(entryDto, username), entryDto);
+	}
+	
+	@Test
+	public void test_updateImage_success() throws NoSuchFieldException, SecurityException, Exception {
+		EntryMapper instance = mock(EntryMapper.class);
+		setFinalStatic(EntryMapper.class.getField("INSTANCE"), instance);
+		MultipartFile multipartFile = mock(MultipartFile.class);
+		String username = "test";
+		long entryID = 10;
+		Entry entry = new Entry();
+		Optional<Entry> optionalMock = mock(Optional.class);
+		when(optionalMock.get()).thenReturn(entry);
+		when(guestEntryRepository.findById(entryID)).thenReturn(optionalMock);
+		when(guestEntryRepository.saveAndFlush(entry)).thenReturn(entry);
+		EntryDto expected = new EntryDto();
+		when(instance.convertToDTO(entry)).thenReturn(expected);
+		assertEquals(this.service.updateImage(multipartFile, username, entryID), expected);
+	}
+	
+	
+	
+	
+	
+
+	private static void setFinalStatic(Field field, Object newValue) throws Exception {
+		field.setAccessible(true);
+
+		Field modifiersField = Field.class.getDeclaredField("modifiers");
+		modifiersField.setAccessible(true);
+		modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+
+		field.set(null, newValue);
+	}
+}
