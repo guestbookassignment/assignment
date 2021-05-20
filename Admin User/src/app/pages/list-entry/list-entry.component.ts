@@ -28,8 +28,10 @@ export class ListEntryComponent implements OnInit {
         this.tableData = data;
       },
       error=>{
+        if(error["status"] != 404) {
         alert("No access zone!");
         this.router.navigate(['/login']);
+        }
       }
     )
   }
