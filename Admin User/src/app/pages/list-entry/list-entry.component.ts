@@ -29,8 +29,8 @@ export class ListEntryComponent implements OnInit {
       },
       error=>{
         if(error["status"] != 404) {
-        alert("No access zone!");
-        this.router.navigate(['/login']);
+          alert("No access zone!");
+          this.router.navigate(['/login']);
         }
       }
     )
