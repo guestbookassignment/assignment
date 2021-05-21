@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Optional;
 import java.util.zip.DataFormatException;
 
@@ -63,7 +62,9 @@ public class GuestEntryService extends BaseServiceImpl<EntryDto, Entry>{
 		return getMapper().convertToDTO(entry);
 	}
 	
-	public EntryDto update(EntryDto entryDto, String username)  {
+	public EntryDto update(EntryDto entryDto, String username) throws DataFormatException  {
+		if(entryDto == null || entryDto.getId() < 0 || entryDto.getContent() == null)
+			throw new DataFormatException("Data invalid"); 
 		Entry entry = getMapper().convertToEntity(entryDto);
 		updateAudit(entry, username);
 		entry = this.guestEntryRepository.saveAndFlush(entry);

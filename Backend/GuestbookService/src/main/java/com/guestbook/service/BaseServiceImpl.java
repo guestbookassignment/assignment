@@ -28,7 +28,7 @@ public abstract class BaseServiceImpl <T extends IDto, S extends Serializable> i
 	}
 
 	@Override
-	public T update(T dto, String username) {
+	public T update(T dto, String username) throws DataFormatException {
 		//Auto-generated method stub - Do nothing
 		return dto;
 	}

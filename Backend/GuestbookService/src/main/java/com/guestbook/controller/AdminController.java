@@ -9,6 +9,7 @@ import static com.guestbook.util.Constants.REJECT_ENTRY_URI;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.zip.DataFormatException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +47,7 @@ public class AdminController {
 	@PutMapping(ADMIN_ENTRY_URI)
 	public EntryDto updateEntry(
 			@ApiParam(value = "Authorization", required = false) @RequestHeader("Authorization") String authorization,
-			@RequestBody EntryDto entryDto) {
+			@RequestBody EntryDto entryDto) throws DataFormatException {
 		logger.info("AdminController: updateEntry - Start");
 		String authToken = authorization.substring("Basic".length()).trim();
 		String username = new String(Base64.getDecoder().decode(authToken)).split(":")[0];

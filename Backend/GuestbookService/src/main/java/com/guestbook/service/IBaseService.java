@@ -26,7 +26,7 @@ public interface IBaseService<T extends IDto, S extends Serializable> {
 	 * @param dto
 	 * @return
 	 */
-	T update(T dto, String username);
+	T update(T dto, String username) throws DataFormatException;
 	
 	/**
 	 * @param dto

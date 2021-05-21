@@ -78,6 +78,17 @@ public class GuestEntryServiceTest {
 		assertEquals(this.service.update(entryDto, username), entryDto);
 	}
 	
+
+	@Test(expected = DataFormatException.class)
+	public void test_update_Exception_ForNullInput() throws DataFormatException {
+		this.service.update(null, "test");
+	}
+	
+	@Test(expected = DataFormatException.class)
+	public void test_update_Exception_ForInvalidInput() throws DataFormatException {
+		this.service.update(new EntryDto(), "test");
+	}
+	
 	@Test
 	public void test_approveOrRejectEntry() throws NoSuchFieldException, SecurityException, Exception {
 		EntryMapper instance = mock(EntryMapper.class);

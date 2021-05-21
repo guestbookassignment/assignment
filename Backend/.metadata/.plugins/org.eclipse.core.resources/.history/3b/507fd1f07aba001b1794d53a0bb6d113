@@ -1,0 +1,21 @@
+spring.application.name = guestbook-service
+server.port= 8901
+spring.jpa.generate-ddl=true
+server.ssl.enabled=false
+
+
+# ===============================
+# = DATA SOURCE
+# ===============================
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+spring.datasource.username=sa
+spring.datasource.password=
+
+# the project
+#spring.jpa.hibernate.ddl-auto = create
+spring.datasource.initialization-mode=always
+spring.jpa.hibernate.ddl-auto=create
+spring.datasource.hikari.connection-timeout=60000
+spring.datasource.hikari.maximum-pool-size=5
+imgur.client.id = bf2e6f73c61fad0
